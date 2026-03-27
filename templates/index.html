@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GitHub Actions Dashboard</title>
+    <link rel="stylesheet" href="/static/css/style.css">
+</head>
+<body>
+    <nav>
+        <div class="brand">
+            <svg viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                <path d="M8 0C3.58 0 0 3.58 0 8a8 8 0 0 0 5.47 7.59c.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82a7.6 7.6 0 0 1 2-.27c.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8z"></path>
+            </svg>
+            <span>Actions Dashboard</span>
+        </div>
+
+        <div class="nav-right">
+            <span id="refresh-timer">1h 0m</span>
+            <img id="user-avatar" class="user-avatar" alt="avatar" style="display:none">
+            <span id="user-name">Loading...</span>
+            <button class="btn" id="manual-refresh-btn" type="button">Refresh</button>
+            <button class="btn btn-green" id="open-trigger-btn" type="button">Run Workflow</button>
+            <a class="btn link-btn" href="/logout">Logout</a>
+        </div>
+    </nav>
+
+    <div class="container">
+        <aside>
+            <h3>Repositories</h3>
+
+            <div class="repo-search">
+                <input id="org-input" type="text" placeholder="Optional org name, e.g. my-org">
+            </div>
+
+            <div class="repo-search repo-search-row">
+                <input id="repo-search" type="text" placeholder="Search repositories...">
+                <button class="btn" id="repo-search-btn" type="button">Search</button>
+            </div>
+
+            <button class="btn select-all-btn" id="select-all-btn" type="button">Select All</button>
+
+            <div class="repo-list" id="repo-list">
+                <div class="empty">Loading repositories...</div>
+            </div>
+        </aside>
+
+        <main>
+            <section class="filters">
+                <div class="filter-group">
+                    <label>Status</label>
+                    <select id="status-filter">
+                        <option value="">All</option>
+                        <option value="queued">Queued</option>
+                        <option value="success">Success</option>
+                        <option value="failure">Failed</option>
+                    </select>
+                </div>
+
+                <div class="filter-group">
+                    <label>Branch</label>
+                    <input id="branch-filter" type="text" placeholder="main" value="main">
+                </div>
+
+                <div class="spacer"></div>
+            </section>
+
+            <section class="stats-row">
+                <div class="stat-card running">
+                    <div class="stat-value" id="stat-running">0</div>
+                    <div class="stat-label">Running</div>
+                </div>
+                <div class="stat-card queued">
+                    <div class="stat-value" id="stat-queued">0</div>
+                    <div class="stat-label">Queued</div>
+                </div>
+                <div class="stat-card success">
+                    <div class="stat-value" id="stat-success">0</div>
+                    <div class="stat-label">Succeeded</div>
+                </div>
+                <div class="stat-card failure">
+                    <div class="stat-value" id="stat-failure">0</div>
+                    <div class="stat-label">Failed</div>
+                </div>
+            </section>
+
+            <section class="table-wrap">
+                <div class="table-header">
+                    <h2>Workflow Runs</h2>
+                    <span class="table-note" id="run-count">0 runs</span>
+                </div>
+
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Status</th>
+                            <th>Workflow</th>
+                            <th>Repo</th>
+                            <th>Branch</th>
+                            <th>Trigger</th>
+                            <th>Actor</th>
+                            <th>Started</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody id="runs-tbody">
+                        <tr>
+                            <td colspan="8" class="empty">Select repositories to view runs.</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </section>
+        </main>
+    </div>
+
+    <div class="modal-overlay" id="trigger-modal">
+        <div class="modal">
+            <h3>Trigger Workflow</h3>
+
+            <label for="trigger-repo">Repository</label>
+            <select id="trigger-repo"></select>
+
+            <label for="trigger-workflow">Workflow</label>
+            <select id="trigger-workflow"></select>
+
+            <label for="trigger-ref">Git Ref / Branch</label>
+            <input id="trigger-ref" type="text" value="main" placeholder="main">
+
+            <div class="modal-actions">
+                <button class="btn" id="trigger-close-btn" type="button">Close</button>
+                <button class="btn btn-green" id="trigger-run-btn" type="button">Run</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="toast" id="toast"></div>
+
+    <script src="/static/js/script.js"></script>
+</body>
+</html>

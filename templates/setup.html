@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Setup - GitHub Actions Dashboard</title>
+    <link rel="stylesheet" href="/static/css/setup.css">
+</head>
+<body>
+    <div class="linux-rain" aria-hidden="true">
+        <img src="/static/img/linux.png" class="linux-drop d1" alt="">
+        <img src="/static/img/linux.png" class="linux-drop d2" alt="">
+        <img src="/static/img/linux.png" class="linux-drop d3" alt="">
+        <img src="/static/img/linux.png" class="linux-drop d4" alt="">
+        <img src="/static/img/linux.png" class="linux-drop d5" alt="">
+        <img src="/static/img/linux.png" class="linux-drop d6" alt="">
+    </div>
+    <div class="setup-wrapper">
+        <div class="setup-card">
+            <div class="setup-logo">
+                <svg viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M8 0C3.58 0 0 3.58 0 8a8 8 0 005.47 7.59c.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82a7.6 7.6 0 012-.27c.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0016 8c0-4.42-3.58-8-8-8z"/>
+                </svg>
+            </div>
+            <h1>Actions Dashboard</h1>
+            <p>One-time configuration</p>
+            <div class="setup-badge">First-time Setup</div>
+
+            <div class="step-list">
+             <strong>How to get your GitHub OAuth credentials</strong>
+              <ol class="setup-steps">
+                <li>
+                <span>Go to <a href="https://github.com/settings/developers" target="_blank">github.com/settings/developers</a></span>
+                </li>
+                <li>
+                <span>Click <strong>New OAuth App</strong></span>
+                </li>
+                <li>
+                <span>Set <strong>Homepage URL</strong>: <code>http://localhost:5000</code></span>
+                </li>
+                <li>
+                <span>Set <strong>Callback URL</strong>: <code>http://localhost:5000/auth/callback</code></span>
+                </li>
+                <li>
+                <span>Register and copy <strong>Client ID</strong>, then generate a <strong>Client Secret</strong></span>
+                </li>
+              </ol>
+            </div>
+
+            <div class="error-box" id="error-box"></div>
+
+            <div class="field">
+                <label>GitHub OAuth Client ID</label>
+                <input type="text" id="client-id" placeholder="gho_..." autocomplete="off">
+                <p class="hint">From your OAuth App page on GitHub.</p>
+            </div>
+
+            <div class="field">
+                <label>GitHub OAuth Client Secret</label>
+                <input type="password" id="client-secret" placeholder="ghs_...">
+                <p class="hint">Shown once when you click <strong>Generate a new client secret</strong>. <a href="https://github.com/settings/developers" target="_blank">Open GitHub</a></p>
+            </div>
+
+            <button class="btn btn-green btn-setup" id="save-btn" onclick="saveSetup()">Save & Connect to GitHub</button>
+
+            <div class="success-box" id="success-box" style="display:none">Configuration saved! Redirecting to GitHub login...</div>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,359 @@
+body {
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  margin: 0;
+  padding: 0;
+  min-height: 100vh;
+  background: radial-gradient(circle at top left, #161b22 0, #02040a 55%, #000 100%);
+  color: #e6edf3;
+  overflow-x: hidden;
+}
+
+/* bike background animation */
+.bike-track {
+  position: fixed;
+  bottom: 90px;
+  left: -200px;
+  width: 200px;
+  height: 120px;
+  pointer-events: none;
+  opacity: 0.7;
+  animation: ride 12s linear infinite;
+}
+
+.bike-body {
+  width: 100%;
+  height: 100%;
+  background: url("https://cdn.jsdelivr.net/gh/tabler/tabler-icons/icons/outline/bike.svg")
+    no-repeat center / contain;
+  filter: drop-shadow(0 0 8px rgba(0, 0, 0, 0.7));
+}
+
+@keyframes ride {
+  0% {
+    transform: translateX(0) translateY(0);
+  }
+  40% {
+    transform: translateX(120vw) translateY(-5px);
+  }
+  60% {
+    transform: translateX(120vw) translateY(-5px);
+  }
+  100% {
+    transform: translateX(0) translateY(0);
+  }
+}
+
+/* center card nicely */
+.setup-wrapper {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 32px 16px;
+}
+
+.setup-card {
+  max-width: 640px;
+  width: 100%;
+  background: linear-gradient(145deg, #0f1724 0%, #111827 40%, #020617 100%);
+  border-radius: 20px;
+  border: 1px solid rgba(148, 163, 184, 0.35);
+  padding: 26px 30px 28px;
+  box-shadow:
+    0 24px 70px rgba(15, 23, 42, 0.95),
+    0 0 0 1px rgba(15, 23, 42, 0.8);
+  position: relative;
+  overflow: hidden;
+}
+
+/* subtle glow top-right */
+.setup-card::before {
+  content: "";
+  position: absolute;
+  top: -120px;
+  right: -120px;
+  width: 260px;
+  height: 260px;
+  background: radial-gradient(circle, rgba(56, 189, 248, 0.32), transparent 60%);
+  opacity: 0.9;
+  pointer-events: none;
+}
+
+.setup-logo {
+  width: 40px;
+  height: 40px;
+  border-radius: 999px;
+  background: rgba(15, 23, 42, 0.95);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 10px;
+  border: 1px solid rgba(148, 163, 184, 0.5);
+}
+
+.setup-logo svg {
+  width: 24px;
+  height: 24px;
+  fill: #e5e7eb;
+}
+
+.setup-card h1 {
+  font-size: 1.7rem;
+  margin: 0 0 4px;
+}
+
+.setup-card > p {
+  margin: 0 0 8px;
+  color: #9ca3af;
+}
+
+.setup-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.75rem;
+  padding: 4px 10px;
+  border-radius: 999px;
+  border: 1px solid rgba(148, 163, 184, 0.4);
+  background: rgba(15, 23, 42, 0.9);
+  color: #e5e7eb;
+  margin-bottom: 18px;
+}
+
+.setup-badge::before {
+  content: "";
+  width: 6px;
+  height: 6px;
+  border-radius: 999px;
+  background: #22c55e;
+}
+
+.step-list {
+  font-size: 0.86rem;
+  margin-bottom: 18px;
+  padding: 14px 16px;
+  border-radius: 12px;
+  background: rgba(15, 23, 42, 0.9);
+  border: 1px dashed rgba(148, 163, 184, 0.35);
+}
+
+.step-list > strong {
+  display: block;
+  margin-bottom: 10px;
+  color: #e5e7eb;
+  font-size: 0.9rem;
+}
+
+.setup-steps {
+  margin: 0;
+  padding-left: 20px;
+}
+
+.setup-steps li {
+  margin-bottom: 10px;
+  line-height: 1.6;
+  color: #dbe4ee;
+  padding-left: 4px;
+}
+
+.setup-steps li span {
+  display: inline-block;
+}
+
+.setup-steps a {
+  color: #38bdf8;
+  text-decoration: none;
+}
+
+.setup-steps a:hover {
+  text-decoration: underline;
+}
+
+.setup-steps code {
+  display: inline-block;
+  margin-top: 4px;
+  padding: 2px 8px;
+  border-radius: 6px;
+  background: rgba(2, 6, 23, 0.9);
+  border: 1px solid rgba(148, 163, 184, 0.2);
+  color: #cbd5e1;
+  font-size: 0.82rem;
+}
+
+
+/* form fields */
+.field {
+  margin-bottom: 16px;
+}
+
+.field label {
+  display: block;
+  font-size: 0.84rem;
+  font-weight: 500;
+  margin-bottom: 6px;
+  color: #e5e7eb;
+}
+
+.input-row {
+  display: flex;
+  gap: 8px;
+}
+
+.input-row input {
+  flex: 1;
+}
+
+.field input {
+  width: 100%;
+  padding: 9px 11px;
+  border-radius: 10px;
+  border: 1px solid rgba(148, 163, 184, 0.55);
+  background: rgba(15, 23, 42, 0.95);
+  color: #f9fafb;
+  font-size: 0.9rem;
+}
+
+.field input::placeholder {
+  color: #6b7280;
+}
+
+.field input:focus {
+  outline: none;
+  border-color: #38bdf8;
+  box-shadow: 0 0 0 1px rgba(56, 189, 248, 0.55);
+}
+
+.hint {
+  margin-top: 4px;
+  font-size: 0.78rem;
+  color: #9ca3af;
+}
+
+.divider {
+  border: none;
+  border-top: 1px solid rgba(31, 41, 55, 0.9);
+  margin: 16px 0 18px;
+}
+
+/* buttons */
+.btn {
+  padding: 8px 14px;
+  border-radius: 999px;
+  border: 1px solid rgba(148, 163, 184, 0.6);
+  background: rgba(15, 23, 42, 0.95);
+  color: #e5e7eb;
+  font-size: 0.84rem;
+  cursor: pointer;
+  transition: background 0.16s ease, border-color 0.16s ease, transform 0.08s ease;
+}
+
+.btn:hover {
+  background: #1f2937;
+  border-color: #e5e7eb;
+  transform: translateY(-0.5px);
+}
+
+.btn-green {
+  background: linear-gradient(135deg, #22c55e, #16a34a);
+  border-color: #22c55e;
+  color: #f9fafb;
+}
+
+.btn-green:hover {
+  background: linear-gradient(135deg, #16a34a, #15803d);
+  border-color: #4ade80;
+}
+
+.btn-setup {
+  width: 100%;
+  margin-top: 8px;
+}
+
+/* messages */
+#error-box,
+.success-box {
+  margin-top: 10px;
+  padding: 9px 11px;
+  border-radius: 10px;
+  font-size: 0.8rem;
+  display: none;
+}
+
+#error-box.show {
+  display: block;
+}
+
+#error-box {
+  border: 1px solid #f97373;
+  background: rgba(127, 29, 29, 0.85);
+  color: #fee2e2;
+}
+
+.success-box {
+  border: 1px solid #4ade80;
+  background: rgba(22, 101, 52, 0.85);
+  color: #dcfce7;
+}
+
+/* responsive */
+@media (max-width: 640px) {
+  .setup-card {
+    padding: 20px 18px 22px;
+    border-radius: 16px;
+  }
+
+  .input-row {
+    flex-direction: column;
+  }
+
+  .btn-setup {
+    font-size: 0.82rem;
+  }
+}
+
+.linux-rain {
+  position: fixed;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.linux-drop {
+  position: absolute;
+  top: -120px;
+  width: 52px;
+  height: 52px;
+  object-fit: contain;
+  opacity: 0.16;
+  filter: drop-shadow(0 8px 18px rgba(0, 0, 0, 0.35));
+  animation-name: linux-fall;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+}
+
+/* random-like positions, sizes, delays, durations */
+.d1 { left: 6%;  width: 42px; animation-duration: 11s; animation-delay: 0s; }
+.d2 { left: 18%; width: 58px; animation-duration: 14s; animation-delay: 2s; }
+.d3 { left: 34%; width: 48px; animation-duration: 10s; animation-delay: 5s; }
+.d4 { left: 57%; width: 64px; animation-duration: 13s; animation-delay: 1s; }
+.d5 { left: 76%; width: 46px; animation-duration: 12s; animation-delay: 4s; }
+.d6 { left: 88%; width: 54px; animation-duration: 15s; animation-delay: 7s; }
+
+@keyframes linux-fall {
+  0% {
+    transform: translateY(-140px) rotate(0deg);
+    opacity: 0;
+  }
+  10% {
+    opacity: 0.14;
+  }
+  50% {
+    transform: translateY(45vh) rotate(120deg);
+    opacity: 0.18;
+  }
+  100% {
+    transform: translateY(110vh) rotate(260deg);
+    opacity: 0;
+  }
+}
