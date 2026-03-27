@@ -172,9 +172,12 @@ To let the dashboard **trigger** workflows, each workflow you want to trigger mu
 name: CI
 
 on:
-  push:
-    branches: [ main ]
-  workflow_dispatch:   # REQUIRED for manual trigger via dashboard
+  workflow_dispatch:
+    inputs:
+      dashboard_triggered_by:
+        description: "User who triggered from dashboard"
+        required: false
+        default: "manual"
 
 jobs:
   build:
