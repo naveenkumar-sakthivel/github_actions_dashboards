@@ -1,0 +1,56 @@
+trigger: none
+
+parameters:
+- name: region
+  displayName: "Select Region"
+  type: string
+  default: "eastus"
+  values:
+    - eastus
+    - westus
+    - centralindia
+
+- name: landscape
+  displayName: "Select Environment"
+  type: string
+  default: "dev"
+  values:
+    - dev
+    - qa
+    - prod
+
+- name: releaseVersion
+  displayName: "Enter Release Version"
+  type: string
+
+stages:
+
+# 🔹 Dev Stage (No Approval)
+- stage: Dev
+  condition: eq('${{ parameters.landscape }}', 'dev')
+  jobs:
+  - job: DevDeploy
+    steps:
+    - script: echo "Deploying to DEV"
+
+# 🔹 QA Stage (Optional Approval)
+- stage: QA
+  condition: eq('${{ parameters.landscape }}', 'qa')
+  jobs:
+  - job: QADeploy
+    steps:
+    - script: echo "Deploying to QA"
+
+# 🔹 PROD Stage (Approval Required)
+- stage: Prod
+  condition: eq('${{ parameters.landscape }}', 'prod')
+  jobs:
+  - deployment: ProdDeploy
+    environment: prod-env   # 👈 THIS TRIGGERS APPROVAL
+    strategy:
+      runOnce:
+        deploy:
+          steps:
+          - script: |
+              echo "Deploying version ${{ parameters.releaseVersion }}"
+              echo "Region: ${{ parameters.region }}"
